@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "6e72f20a-e857-43d7-807c-9f515ada89b8",
+		"name": "SpringbootH2Database example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0479e82c-c08a-40dd-bae3-8fc1110d0f60",
+						"exec": [
+							"// Random id.\r",
+							"pm.environment.set(\"id\", _.random(1000, 5000));\r",
+							"// Random age.\r",
+							"pm.environment.set(\"age\", _.random(1, 10));\r",
+							"// Random email address.\r",
+							"pm.environment.set(\"email\", _.random(1, 99) + \"@myDomain.com\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\":{{id}},\r\n\t\"empId\":{{id}},\r\n  \"name\": \"Test-{{$timestamp}}\",\r\n  \"age\": {{age}},\r\n  \"emailAddress\": \"{{email}}\",\r\n  \"projectName\": null,\r\n        \"projectId\": 12345,\r\n        \"startDate\": \"2020-03-03\",\r\n        \"endDate\": {{$timestamp}},\r\n        \"percentage\": 0,\r\n        \"progress\": null,\r\n        \"vipCode\": null,\r\n        \"geId\": null,\r\n        \"codeValue\": null,\r\n        \"location\": null,\r\n        \"coloum1\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/employee/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"employee",
+						"save"
+					]
+				},
+				"description": "Save student details in the h2 database."
+			},
+			"response": []
+		},
+		{
+			"name": "Create project",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c3ae1638-3425-43fd-b46d-7be15ef8882b",
+						"exec": [
+							"// Random id.\r",
+							"pm.environment.set(\"id\", _.random(10001, 100000));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test-{{$timestamp}}\",\r\n  \"id\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/projects/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"projects",
+						"save"
+					]
+				},
+				"description": "Save student details in the h2 database."
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5beea512-4b4f-4843-a1ba-3153cc9b8897",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.jcg.api.v1+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/employee/getall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"employee",
+						"getall"
+					]
+				},
+				"description": "Get all students from the h2 database."
+			},
+			"response": []
+		},
+		{
+			"name": "Get by empId",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c79e9fc4-98d1-4e8d-8b09-f532d95e0fbf",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.jcg.api.v1+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/employee/getById?id=4868",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"employee",
+						"getById"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4868"
+						}
+					]
+				},
+				"description": "Get all students from the h2 database."
+			},
+			"response": []
+		},
+		{
+			"name": "Get by projId",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "609a7f25-eeeb-4a2e-acaf-d00ec8b39c76",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.jcg.api.v1+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/employee/getByProjId?id=12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"employee",
+						"getByProjId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "Get all students from the h2 database."
+			},
+			"response": []
+		},
+		{
+			"name": "Get projects",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "622fc274-125b-4a79-8d0e-734812e67d6d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.jcg.api.v1+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:10090/projects/getall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"projects",
+						"getall"
+					]
+				},
+				"description": "Get all students from the h2 database."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

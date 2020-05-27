@@ -1,5 +1,9 @@
 package com.springboot.h2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -9,6 +13,8 @@ import javax.persistence.Id;
 
 // @Entity annotation specifies that the class is mapped to a database table.
 @Entity
+@SQLDelete(sql = "UPDATE Employee SET deleted=true WHERE id=?")
+@Where(clause = "deleted = false")
 public class Employee {
 	@Id
 	private int id;
@@ -22,12 +28,14 @@ public class Employee {
 	private Date endDate;
 	private int percentage;
 	private String progress;
-	private String vipCode;
+	private String vpnCode;
 	private String geId;
-	private String codeValue;
+	private String phoneNumber;
 	private String location;
-	private String coloum1;
-	private String coloum2;
+	private String managerName;
+	private String projectLocation;
+	@JsonIgnore
+	private Boolean deleted;
 
 
 	/**
@@ -207,18 +215,18 @@ public class Employee {
 
 
 	/**
-	 * @return the vipCode
+	 * @return the vpnCode
 	 */
-	public String getVipCode() {
-		return vipCode;
+	public String getVpnCode() {
+		return vpnCode;
 	}
 
 
 	/**
-	 * @param vipCode the vipCode to set
+	 * @param vpnCode the vipCode to set
 	 */
-	public void setVipCode(String vipCode) {
-		this.vipCode = vipCode;
+	public void setVpnCode(String vpnCode) {
+		this.vpnCode = vpnCode;
 	}
 
 
@@ -239,18 +247,18 @@ public class Employee {
 
 
 	/**
-	 * @return the codeValue
+	 * @return the phoneNumber
 	 */
-	public String getCodeValue() {
-		return codeValue;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
 
 	/**
-	 * @param codeValue the codeValue to set
+	 * @param phoneNumber the phoneNumber to set
 	 */
-	public void setCodeValue(String codeValue) {
-		this.codeValue = codeValue;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 
@@ -271,41 +279,41 @@ public class Employee {
 
 
 	/**
-	 * @return the coloum1
+	 * @return the managerName
 	 */
-	public String getColoum1() {
-		return coloum1;
+	public String getManagerName() {
+		return managerName;
 	}
 
 
 	/**
-	 * @param coloum1 the coloum1 to set
+	 * @param managerName the managerName to set
 	 */
-	public void setColoum1(String coloum1) {
-		this.coloum1 = coloum1;
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 
 
 	/**
-	 * @return the coloum2
+	 * @return the projectLocation
 	 */
-	public String getColoum2() {
-		return coloum2;
+	public String getProjectLocation() {
+		return projectLocation;
 	}
 
 
 	/**
-	 * @param coloum2 the coloum2 to set
+	 * @param projectLocation the projectLocation to set
 	 */
-	public void setColoum2(String coloum2) {
-		this.coloum2 = coloum2;
+	public void setProjectLocation(String projectLocation) {
+		this.projectLocation = projectLocation;
 	}
 
 	public Employee() {}
 	// Parameterized constructor.
 	public Employee(int id, int empId, String name, int age, String emailAddress, String projectName, int projectId,
-			Date startDate, Date endDate, int percentage, String progress, String vipCode, String geId,
-			String codeValue, String location, String coloum1,  String coloum2) {
+			Date startDate, Date endDate, int percentage, String progress, String vpnCode, String geId,
+			String phoneNumber, String location, String managerName,  String projectLocation) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -318,11 +326,11 @@ public class Employee {
 		this.endDate = endDate;
 		this.percentage = percentage;
 		this.progress = progress;
-		this.vipCode = vipCode;
+		this.vpnCode = vpnCode;
 		this.geId = geId;
-		this.codeValue = codeValue;
+		this.phoneNumber = phoneNumber;
 		this.location = location;
-		this.coloum1 = coloum1;
-		this.coloum2 = coloum2;
+		this.managerName = managerName;
+		this.projectLocation = projectLocation;
 	}
 }

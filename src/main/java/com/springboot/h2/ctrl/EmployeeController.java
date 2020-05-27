@@ -83,6 +83,11 @@ public class EmployeeController {
 		log.info("delete employee details from the database by empId.");
 		service.deleteByEmpId(id);
 	}
+	@DeleteMapping(value = "/employee/deleteById", produces = "application/vnd.jcg.api.v1+json")
+	public void deleteById(@RequestParam(value = "id") int id) {
+		log.info("delete employee details from the database by empId.");
+		service.deleteById(id);
+	}
 
 	@PostMapping(value = "/projects/save")
 	public Projects projectSave(final @RequestBody @Valid Projects projects) {

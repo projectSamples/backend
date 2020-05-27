@@ -57,6 +57,9 @@ public class EmployeeService {
 	public void deleteByEmpId(int id) {
 		repository.deleteByEmpId(id);
 	}
+	public void deleteById(int id) {
+		repository.deleteById(id);
+	}
 
 	public Employee update(Employee emplyoee, int id) throws ResourceNotFoundException {
 		Optional<Projects> proj = projRepo.findById(emplyoee.getProjectId());

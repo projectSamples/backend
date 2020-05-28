@@ -15,10 +15,10 @@ import com.springboot.h2.model.Employee;
 @Repository
 @Transactional
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+	@Query("select e FROM Employee e where e.empId = :empid and e.deleted = false")
 	List<Employee> findByEmpId(int empid);
+	@Query("select e FROM Employee e where e.projectId = :projId and e.deleted = false")
 	List<Employee> findByProjectId(int projId);
-	void deleteByEmpId(int projId);
-	//@Modifying      // to mark delete or update query
-    @Query("select max(id) FROM Employee e")       // it will delete all the record with specific name
+    @Query("select max(id) FROM Employee e")       // it will get max id to handle manual data entry to generated id
     int maxid();
 }

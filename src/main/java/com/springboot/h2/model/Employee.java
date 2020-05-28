@@ -11,7 +11,6 @@ import javax.persistence.*;
 // @Entity annotation specifies that the class is mapped to a database table.
 @Entity
 @SQLDelete(sql = "UPDATE Employee SET deleted=true WHERE id=?")
-@Where(clause = "deleted = false")
 public class Employee {
 	@Id
 	private int id;

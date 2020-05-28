@@ -6,10 +6,7 @@ import org.hibernate.annotations.Where;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 // @Entity annotation specifies that the class is mapped to a database table.
 @Entity
@@ -35,7 +32,17 @@ public class Employee {
 	private String managerName;
 	private String projectLocation;
 	@JsonIgnore
-	private Boolean deleted;
+	@Column(name = "deleted", columnDefinition = "boolean default false")
+	private boolean deleted = false;
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
+
 
 
 	/**

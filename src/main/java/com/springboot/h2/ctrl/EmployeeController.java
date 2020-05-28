@@ -77,12 +77,6 @@ public class EmployeeController {
 		log.info("Getting employee details from the database by projId.");
 		return service.getByProjId(id);
 	}
-
-	@DeleteMapping(value = "/employee/deleteByEmpId", produces = "application/vnd.jcg.api.v1+json")
-	public void deleteByEmpId(@RequestParam(value = "id") int id) {
-		log.info("delete employee details from the database by empId.");
-		service.deleteByEmpId(id);
-	}
 	@DeleteMapping(value = "/employee/deleteById", produces = "application/vnd.jcg.api.v1+json")
 	public void deleteById(@RequestParam(value = "id") int id) {
 		log.info("delete employee details from the database by empId.");

@@ -1,6 +1,9 @@
 package com.springboot.h2.serv;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,27 @@ public class EmployeeService {
 
 	// Save student entity in the h2 database.
 	public void save(final Employee employee) throws ResourceNotFoundException {
+//		try {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			sdf.setLenient(false);
+//
+//			Date d1 = sdf.parse("2020-01-11");
+//			Date d2 = sdf.parse(employee.getStartDate().toString());
+//			Date d3 = sdf.parse("2020-11-12");
+//
+//			if (d2.compareTo(d1) >= 0) {
+//				if (d2.compareTo(d3) <= 0) {
+//					System.out.println("d2 is in between d1 and d2");
+//				} else {
+//					System.out.println("d2 is NOT in between d1 and d2");
+//				}
+//			} else {
+//				System.out.println("d2 is NOT in between d1 and d2");
+//			}
+//
+//		} catch (ParseException pe) {
+//			pe.printStackTrace();
+//		}
 		Optional<Projects> proj = projRepo.findById(employee.getProjectId());
 		proj.orElseThrow(
 				() -> new ResourceNotFoundException("Project not found for this id :: " + employee.getProjectId()));
@@ -54,9 +78,6 @@ public class EmployeeService {
 		return repository.findByProjectId(id);
 	}
 
-	public void deleteByEmpId(int id) {
-		repository.deleteByEmpId(id);
-	}
 	public void deleteById(int id) {
 		repository.deleteById(id);
 	}
@@ -66,11 +87,7 @@ public class EmployeeService {
 		proj.orElseThrow(
 				() -> new ResourceNotFoundException("Project not found for this id :: " + emplyoee.getProjectId()));
 		if (proj.get().getName().equals(emplyoee.getProjectName())) {
-			Optional<Employee> employeeOptional = repository.findById(id);
-			if (!employeeOptional.isPresent())
-				throw new ResourceNotFoundException("Employee id did not matched :: ");
 			emplyoee.setId(id);
-
 			return repository.save(emplyoee);
 		} else {
 			throw new ResourceNotFoundException("Project name did not matched :: ");
